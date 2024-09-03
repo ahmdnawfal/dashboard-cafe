@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { RxDashboard } from 'react-icons/rx';
+import { PiMoneyWavyBold } from 'react-icons/pi';
+import { CiUser } from 'react-icons/ci';
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -10,16 +13,19 @@ const Sidebar = () => {
       key: 'dashboard',
       name: 'Dashboard',
       href: '/dashboard',
+      icon: RxDashboard,
     },
     {
       key: 'transactions',
       name: 'Transactions',
       href: '/dashboard/transactions',
+      icon: PiMoneyWavyBold,
     },
     {
       key: 'profile',
       name: 'Profile',
       href: '/dashboard/profile',
+      icon: CiUser,
     },
   ];
 
@@ -28,14 +34,18 @@ const Sidebar = () => {
       <nav>
         <ul>
           {menu.map((value) => (
-            <li
-              className={`py-2 px-4 font-semibold  ${
-                pathname === value.href ? 'bg-black text-white rounded-sm' : ''
-              }`}
-              key={value.key}
-            >
-              <Link href={value.href}>{value.name}</Link>
-            </li>
+            <Link href={value.href} key={value.key}>
+              <li
+                className={`py-2 px-4 flex items-center gap-2 text-lg font-semibold my-2  ${
+                  pathname === value.href
+                    ? 'bg-black text-white rounded-sm'
+                    : ''
+                }`}
+              >
+                {<value.icon className='text-xl' />}
+                {value.name}
+              </li>
+            </Link>
           ))}
         </ul>
       </nav>
